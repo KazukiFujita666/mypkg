@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+import os
+from glob import glob
 
 package_name = 'mypkg'
 
@@ -10,6 +12,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.py')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -17,11 +20,7 @@ setup(
     maintainer_email='wisteria150606@gmail.com',
     description='a package for practice',
     license='BSD-3-Clause',
-    extras_require={
-        'test': [
-            'pytest',
-        ],
-    },
+    extras_require={'test': ['pytest'],},
     entry_points={
         'console_scripts': [
             'talker = mypkg.talker:main',
@@ -29,3 +28,4 @@ setup(
         ],
     },
 )
+
